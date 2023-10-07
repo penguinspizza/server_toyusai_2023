@@ -1,4 +1,4 @@
-from bottle import route, run, get, post, request
+from bottle import run, get, post, request
 import json
 
 def main():
@@ -6,7 +6,7 @@ def main():
 
 # id 1~4 trueにセット
 @post("/flag")
-def route():
+def setIdTrue():
     reqId = request.params.id
     print("Requested id: ", reqId)
     
@@ -23,7 +23,7 @@ def route():
 
 # JSONを文字列で返す
 @get("/flag")
-def route():
+def getJson():
     with open("status.json", "r") as f:
         data = json.load(f)
     
@@ -33,7 +33,7 @@ def route():
 
 # clearをtrueにセット
 @post("/complete")
-def route():
+def setClearTrue():
     with open("status.json", "r") as f:
         data = json.load(f)
     
@@ -41,6 +41,14 @@ def route():
 
     with open("status.json", "w") as f:
         json.dump(data, f)
+
+# 画像を受け取って保存
+# 参考↓
+# https://shuzo-kino.hateblo.jp/entry/2016/11/14/232154
+@post("/img")
+def setImg():
+    data = request.files.data
+    data.save("./", overwrite=True)
 
 if __name__ == "__main__":
     main()
