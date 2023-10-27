@@ -33,11 +33,10 @@ def argIdTrue(id):
     with open("status.json", "w") as f:
         json.dump(data, f)
 
-# HTTPレスポンスを生成する関数
-def genHTTPResponse(element):
-    body = f'<html><body>{element}</body></html>'
-    res = HTTPResponse(status=200, body=body)
-    res.set_header('Content-Type', 'text/html')
+# HTTPリダイレクトレスポンスを生成する関数
+def genHTTPRedirectResponse(url):
+    res = HTTPResponse(status=302)
+    res.set_header('Location', url)
     return res
 
 # id 1~4 trueにセット
@@ -176,15 +175,16 @@ def setImg():
 @post("/keyword")
 def receiveKeyword():
     word = request.params.word
+    print("input word:", word)
 
     if (word == ANS_KEYWORD):
         argIdTrue("1")
 
-        responseText = "True"
+        url = "http://192.168.0.32/escape_room/ok.html"
     else:
-        responseText = "False"
+        url = "http://192.168.0.32/escape_room/ng.html"
         
-    res = genHTTPResponse(responseText)
+    res = genHTTPRedirectResponse(url)
     return res
 
 
