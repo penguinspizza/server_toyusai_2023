@@ -48,6 +48,11 @@ def setIdTrue():
 
     argIdTrue(reqId)
 
+# ライントレーサーがゴールしたらid2をtrueにする
+@post("/goal")
+def setIdTrue():
+    argIdTrue("2")
+
 # JSONを文字列で返す
 @get("/flag")
 def getJson():
