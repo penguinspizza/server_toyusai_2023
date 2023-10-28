@@ -17,6 +17,9 @@ YOLO_RESULT_DIR_PATH = "C:\\Users\\ymd\\Desktop\\app_dev_toyusai2023\\server_toy
 
 ANS_KEYWORD = "ぶんり"
 
+# 閾値を設定
+THRESHOID = 0.75
+
 def main():
     run(host="0.0.0.0", port=2222)
 
@@ -148,16 +151,13 @@ def setImg():
     for row in data:
         print(row)
 
-    # 閾値を設定
-    threshold = 0.60
-
     # 2次元配列内で最大の一番右の要素を持つ行を見つける
     max_right_element = float('-inf')  # 最大の右要素を無限小の値で初期化
     max_left_element = None  # 最大の右要素を持つ行の左要素を格納する変数
 
     for row in data:
         right_element = row[-1]  # 一番右の要素を取得
-        if right_element > max_right_element and right_element >= threshold:
+        if right_element > max_right_element and right_element >= THRESHOID:
             max_right_element = right_element
             max_left_element = row[0]  # 最大の右要素を持つ行の左要素を格納
 
