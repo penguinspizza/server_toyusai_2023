@@ -10,7 +10,7 @@ YOLO_DETECT_PY_PATH = "C:\\Users\\ymd\\Desktop\\app_dev_toyusai2023\\yolo_learni
 YOLO_SOURCE_DIR_PATH = "C:\\Users\\ymd\\Desktop\\app_dev_toyusai2023\\server_toyusai_2023\\img\\"
 
 # モデルのパス(絶対パス)
-YOLO_MODEL_PATH = "C:\\Users\\ymd\\Desktop\\app_dev_toyusai2023\\server_toyusai_2023\\models\\best.pt"
+YOLO_MODEL_PATH = "C:\\Users\\ymd\\Desktop\\app_dev_toyusai2023\\server_toyusai_2023\\models\\best_stand.pt"
 
 # 結果を保存するディレクトリ(絶対パス)
 YOLO_RESULT_DIR_PATH = "C:\\Users\\ymd\\Desktop\\app_dev_toyusai2023\\server_toyusai_2023\\results\\exp"
@@ -63,7 +63,7 @@ def getJson():
     return data_str
 
 # clearをtrueにセット
-@post("/complete")
+@get("/complete")
 def setClearTrue():
     with open("status.json", "r") as f:
         data = json.load(f)
@@ -186,6 +186,26 @@ def receiveKeyword():
         
     res = genHTTPRedirectResponse(url)
     return res
+
+# フラグのリセット
+@post("/reset")
+def resetFlag():
+    # JSON読み込んで
+    with open("status.json", "r") as f:
+        data = json.load(f)
+
+    # リクエストされたidをfalseにして
+    data["1"] = "false"
+    data["2"] = "false"
+    data["3"] = "false"
+    data["4"] = "false"
+    data["clear"] = "false"
+
+    # JSONに書き出し
+    with open("status.json", "w") as f:
+        json.dump(data, f)
+
+    return genHTTPRedirectResponse("http://192.168.0.32/reset_flag/")
 
 
 if __name__ == "__main__":
