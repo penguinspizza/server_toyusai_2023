@@ -10,7 +10,7 @@ YOLO_DETECT_PY_PATH = "C:\\Users\\ymd\\Desktop\\app_dev_toyusai2023\\yolo_learni
 YOLO_SOURCE_DIR_PATH = "C:\\Users\\ymd\\Desktop\\app_dev_toyusai2023\\server_toyusai_2023\\img\\"
 
 # モデルのパス(絶対パス)
-YOLO_MODEL_PATH = "C:\\Users\\ymd\\Desktop\\app_dev_toyusai2023\\server_toyusai_2023\\models\\best_stand.pt"
+YOLO_MODEL_PATH = "C:\\Users\\ymd\\Desktop\\app_dev_toyusai2023\\server_toyusai_2023\\models\\best_handshake.pt"
 
 # 結果を保存するディレクトリ(絶対パス)
 YOLO_RESULT_DIR_PATH = "C:\\Users\\ymd\\Desktop\\app_dev_toyusai2023\\server_toyusai_2023\\results\\exp"
@@ -18,7 +18,7 @@ YOLO_RESULT_DIR_PATH = "C:\\Users\\ymd\\Desktop\\app_dev_toyusai2023\\server_toy
 ANS_KEYWORD = "ぶんり"
 
 # 閾値を設定
-THRESHOID = 0.75
+THRESHOID = 0.60
 
 def main():
     run(host="0.0.0.0", port=2222)
